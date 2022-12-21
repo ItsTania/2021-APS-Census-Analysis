@@ -7,10 +7,15 @@ The final independent project for the Data for Decision Making (SOCR3001) course
 3. [Project Organization](#project-organization)
 
 ## [About](#about)
-This project surrounded the 2021 APS census data. It contained the aggragated the outcomes the APS' workforce satisfaction survey. I decided to focus on the early career population particularly with the release of the 'Delivering for Tomorrow:
+This report was primarily influenced by the release of the 'Delivering for Tomorrow:
 APS Workforce Strategy 2025'. 
+
+With the confines of the assignment, I decided to focus particularly on the early career population
+
 While the analysis itself if not complex, this project highlights the role data can play in public policy.
 ### Data Source:
+This project surrounded the 2021 APS census data. It contained the aggragated the outcomes the APS' workforce satisfaction survey. 
+
 https://www.apsc.gov.au/initiatives-and-programs/workforce-information/aps-employee-census-2021
 https://data.gov.au/data/dataset/3b90a6bf-d195-4692-83c6-ef874dca5593/resource/80a7aa04-87f6-4d42-8d52-6cb51fd84918/download/2021-aps-employee-census-5-point-dataset.csv
 

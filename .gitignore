@@ -1,4 +1,5 @@
 # Ignore the final report (redundant)
 *.pdf
+*.html
 # Ignore data files
 *.csv

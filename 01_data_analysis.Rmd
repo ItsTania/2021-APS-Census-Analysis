@@ -1,0 +1,167 @@
+---
+title: "SOCR3001: Data Analysis"
+output: word_document
+---
+
+
+
+```{r}
+library(GGally)
+library(ggplot2)
+library(HH)
+library(reshape2)
+library(gt)
+```
+
+```{r}
+## Read in Data
+df <- read.csv("2021-aps-employee-census-5-point-dataset.csv",  header=TRUE) 
+
+## Identify Target Population
+df$entry_level <- apply(df, 1, FUN = function(x) x[4]=="Trainee/Graduate/APS" && x[3]=="Under 40 years")
+table(df$entry_level)
+```
+
+```{r}
+## Summary Statistic 
+df_part2 <- df[df$entry_level, 5:17]
+df_part2$id <- row.names(df_part2)
+
+# Re-code as ordered factors
+melted_df <- melt(df_part2, id.vars = "id")
+melted_df$value <- ordered(melted_df$value, levels=c("Strongly agree", "Agree", "Neither agree nor disagree", "Disagree", "Strongly disagree"))
+
+# Calculate Freq.
+frequencies <- table(melted_df$variable, melted_df$value)
+
+# Generate Stacked Bar Plots
+likert(frequencies[,5:1], 
+       horizontal=TRUE,
+       main = "Entry-Level: Responses to general impression of current job", 
+       rightAxisLabels = NULL,
+       ylab.right = "",
+       as.percent=TRUE,
+       ReferenceZero = 3,
+       auto.key=list(space = "right", columns = 1, reverse = TRUE))
+
+precent_table <- (t(round(100*frequencies/nrow(df_part2), digits=2)))
+precent_table
+```
+
+```{r}
+## Repeat for rest of pop
+df_part4 <- df[!df$entry_level, 5:17]
+df_part4$id <- row.names(df_part4)
+
+# Re-code as ordered factors
+melted_df_4 <- melt(df_part4, id.vars = "id")
+melted_df_4$value <- ordered(melted_df_4$value, levels=c("Strongly agree", "Agree", "Neither agree nor disagree", "Disagree", "Strongly disagree"))
+
+# Calculate Freq.
+frequencies_4 <- table(melted_df_4$variable, melted_df_4$value)
+
+# Generate Stacked Bar Plots
+likert(frequencies_4[,5:1], 
+       horizontal=TRUE,
+       main = "Rest of APS: Responses to general impression of current job", 
+       rightAxisLabels = NULL,
+       ylab.right = "",
+       as.percent=TRUE,
+       ReferenceZero = 3,
+       auto.key=list(space = "right", columns = 1, reverse = TRUE))
+
+precent_table_4 <- (t(round(100*frequencies_4/nrow(df_part4), digits=2)))
+precent_table_4
+```
+```{r}
+## Predict
+agrees <- c("Strongly agree", "Agree", "Neither agree nor disagree", "Disagree", "Strongly disagree")
+to_change_agrees <-
+
+always <- c("Always", "Often", "Sometimes", "Rarely", "Never" )
+to_change_always <- c("q33a", "q33f")
+
+to_label <- c(
+  "I want to leave my position as soon as possible" ,
+  "I want to leave my position within the next 12 months" ,
+  "I want to stay working in my position for the next one to two years",
+  "I want to stay working in my position for at least the next three years"
+)
+
+# Recode as levels
+label <- ordered(df[, c('q39')], levels=to_label)
+levels(label) <- c(1:4)
+label <- as.numeric(levels(label))[label]
+df_subsection <- cbind(df[, 5:17], df[, c('q23a', 'q23g', 'q44c')], df[, c('q33a', 'q33f')], label)
+
+for(i in c(1:16)){
+  df_subsection[,i] <- ordered(df_subsection[,i], levels=agrees)
+}
+
+for(i in c(17, 18)){
+  df_subsection[,i] <- ordered(df_subsection[,i], levels=always)
+}
+
+
+# The Target Population
+df_part3 <- df_subsection[df$entry_level,]
+df_part3 <- df_part3[complete.cases(df_part3),]
+
+# Analyise relationships
+model <- glm(label~., data=df_part3)
+summary(model)
+
+# Comparison
+df_part5 <- df_subsection[!df$entry_level,]
+df_part5 <- df_part5[complete.cases(df_part5),]
+model2 <- glm(label~., data=df_part5)
+summary(model2)
+```
+
+```{r}
+## Comparison to the rest of the APS
+# For readability
+prop_difference <- precent_table - precent_table_4
+prop_difference
+
+# Get proprtions
+pt_early <- precent_table *0.01
+pt_APS <- precent_table_4 *0.01
+
+early_sample_size <- nrow(df_part2)
+APS_sample_size <- nrow(df_part4)
+total <- early_sample_size + APS_sample_size
+
+# Calculate p0
+p0 <- ((pt_early*early_sample_size) + (pt_APS*APS_sample_size))/total
+
+# Calculate SE
+SE <- sqrt(p0 *(1-p0)*((1/early_sample_size)+(1/APS_sample_size)))
+
+# Pooled Z-Test
+z_score <- round((pt_APS-pt_early)/SE, digits=2)
+z_score
+
+# Significant
+print(c(qnorm(0.025), qnorm(0.975)))
+
+# Reasons for leaving
+leaving_analysis <- df[, c('q41', 'entry_level')]
+leaving_analysis$q41 <-na_if(leaving_analysis$q41, " ")
+leaving_analysis$q41 <- as.factor(leaving_analysis$q41)
+leaving_analysis <- leaving_analysis[complete.cases(leaving_analysis),]
+
+table <- prop.table(table(as.factor(leaving_analysis$q41), leaving_analysis$entry_level), 2)
+table <- as.data.frame(table)
+
+colnames(table) <- c("Reason_for_Leaving", "Is_in_entry_level_program", "Freq_as_percent_of_subset")
+  
+ggplot(table, aes(x = Reason_for_Leaving, y = Freq_as_percent_of_subset, fill = Is_in_entry_level_program)) + 
+  geom_bar(stat="identity", position = "dodge")
+
+key
+
+table
+
+```
+
