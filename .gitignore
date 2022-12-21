@@ -1,0 +1,4 @@
+# Ignore the final report (redundant)
+*.pdf
+# Ignore data files
+*.csv
