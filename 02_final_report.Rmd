@@ -19,7 +19,7 @@ The aim of this paper is to analyse the attitudes and job satisfaction of partic
 
 First, the paper will provide context on the current state of the APS and highlight why it is important to validate the performance of entry-level programs to inform future recruitment strategies. After outlining the motivating research questions, it will then evaluate the strengths and weaknesses of the APS 2021 census data before describing the research method. Overall, it finds that participants generally have a positive view on working in their current role however identifies a lack of growth opportunities as a pressure point. Policy should address this by identifying and rectifying the specific issues which may cause this behaviour. Additionally, as the analysis found that the program participants have significantly different attitudes and values to mid-senior level professionals, further investigations into the career values of mid and senior level professionals should be done as tailoring a recruitment strategy will be more effective than just modelling one of the existing entry-level programs.
 
-Context and Literature Review
+**Context and Literature Review**
 The APS’ performance as a workforce is essential in providing good, essential services to the Australian Government, Parliament, and people. In 2019, they underwent an independent review where it was identified that the “APS needs a service-wide transformation to achieve better outcomes”. One of the key priorities was to invest in capability and talent development. An identified barrier was the overreliance on internal hiring with 92% of promotions in the APS being internal to the agency and over 25% of external SES hires leaving within 2 years. External hiring is an important human resource practice as it leads to the growth of the skills and attitudes of the workforce. As a the only systematic search for external hires occurred at the graduate/ trainee/ internship level, one of their recommendations was:
 
 “Annual external recruitment at EL and SES levels, modelled on the approach to graduates, to reduce barriers to entry from outside the APS.”
@@ -34,7 +34,7 @@ The existing, publicly available evaluations are limited to short case studies w
 
 This paper aims to contribute to the evaluation of current graduate, trainee, and internship programs by focusing on one of the relevant outcomes, retention rate, by using job satisfaction as a proxy measurement. Existing literature justifies the use of job satisfaction as it is strongly correlated with employee retention rate.
 
-Research Questions
+**Research Questions**
 As outlined in the literature review, this paper’s analysis is motivated by the recommendation to use the current implementation of the graduate/ entry-level programs to design future mid-senior level recruitment strategies. This paper is interested in challenging two assumptions behind this recommendation:
 Are current entry-level recruitment programs effective in retaining talent? Even if the programs are effective in attracting and developing the right talent, it would be detrimental to model future recruitment strategies off a program that has a high employee turnover rate.
 What insights from a program targeting entry-level talent could be useful for designing a similar program for a different target population (mid or senior level professionals)? 
@@ -117,7 +117,7 @@ Include a longitudinal measurement to justify causal claims on the efficacy of t
 include qualitative focus groups to further investigate causal mechanics and address RQ 4-7
 The topic of APS recruitment is important to understand as the quality of their services are so important for upholding the quality of Australians lives. 
 
-**Conclusion** 
+**Conclusion**
 Overall, this paper has used a subsection of the 2021 APS census to analyse patterns in the attitudes of employees (who are assumed to be) in an entry-level program such as the APS graduate program. The key takeaway from this analysis is that overall, participants of the program
 
 
